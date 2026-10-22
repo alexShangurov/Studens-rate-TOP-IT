@@ -1,0 +1,55 @@
+
+body {
+  background-color: #4B0082;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+th, td {
+  padding: 10px;
+  border: 1px solid white;
+  text-align: left;
+  vertical-align: middle;
+}
+th {
+  background-color: #6A0DAD;
+}
+.button {
+  background-color: #8A2BE2;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #9370DB;
+}
+.button.delete {
+  background-color: #A52A2A;
+}
+.button.delete:hover {
+  background-color: #CD5C5C;
+}
+.button.add{
+  background-color: #009200;
+}
+.button.add:hover {
+  background-color: #B4EA7F;
+}
+.button.minus {
+  background-color: #A52A2A;
+}
+.button.minus:hover {
+  background-color: #CD5C5C;
+}
+
+.prestige-stars {
+  color: #FFD700;
+  margin-left: 5px;
+  font-weight: bold;
+}
