@@ -1,4 +1,5 @@
 export function getTitle(points: number) {
+  if (points == 0) return 'Позор семьи айтишников';
   if (points <= 100) return 'Новичок I';
   if (points <= 200) return 'Новичок II';
   if (points <= 400) return 'Новичок III';

@@ -3,7 +3,6 @@
   import { getTitle } from '#lib/getRating.ts'
 
   type Participiant = {
-    id: number,
     name: string,
     points: number,
     prestige: number,
@@ -12,27 +11,23 @@
 
   const student =
     {
-      id: 0,
       name: 'name',
       points: 1000,
       prestige: 0,
       group: 'class',
-    }
-  const example2 = {
-      id: 1,
-      name: 'Амстронг Варувич',
-      points: 4852,
-      prestige: 3,
-      group: '10А',
-  }
+    } 
 
   let data: Participiant[] = $state([
     student
   ])
-  
+
   //Сортировка
   let participiants = $derived.by(() => {
-    const sorted = data.toSorted((a, b) => b.points - a.points)
+    const dataWithIndexes = data.map((d, i) => ({
+      ...d,
+      indexBeforeSort: i
+    }))
+    const sorted = dataWithIndexes.toSorted((a, b) => b.points - a.points)
     const grouped = Object.groupBy(sorted, ({ group }) => group ? group : '_excluded')
     delete grouped._excluded
     return sorted.map((p, i) => ({
@@ -41,7 +36,8 @@
       rank: i + 1,
       rankInGroup: (
         p.group
-          ? grouped[p.group]!.findIndex((v) => p.id == v.id) + 1
+                                    // сравнение адресов объектов
+          ? grouped[p.group]!.findIndex((v) => p === v) + 1
           : null
       ),
     }))
@@ -68,28 +64,29 @@
        <td><span>{p.rank}</span></td>
        <td><span>{p.rankInGroup}</span></td>
        <td>
-         <span>{p.name} {'⭐️'.repeat(p.prestige)}</span>
+         <input bind:value={data[p.indexBeforeSort].name}>
+         <span>{'⭐️'.repeat(p.prestige)}</span>
        </td>
-       <td>{p.points}</td>
+       <td>
+         {p.points}
+
+         <button class='button add' onclick={()=>{
+           const item = data[p.indexBeforeSort]
+           item.points += 50
+         }}>+50</button>
+
+         <button class='button minus' onclick={()=>{
+          const item = data[p.indexBeforeSort]
+          item.points -= 50
+          if (item.points < 0) item.points = 0
+        }}>-50</button>
+       </td>
        <td>{p.title}</td>
        <td>{p.group}</td>
        <td>
          <button class='button delete' onclick={() => {
-           data = data.filter(d => d.id !== p.id);
+           data.splice(p.indexBeforeSort, 1)
           }}>Удалить</button>
-
-         <button class='button add' onclick={()=>{
-          const item = data.find(d => d.id === p.id);
-          if(item){item.points += 50};
-         }}>+50</button>
-         
-         <button class='button minus' onclick={()=>{
-          const item = data.find(d => d.id === p.id);
-          if(item){
-            if(item.points <= 50){item.points=0}
-            else{item.points -= 50}
-          };
-          }}>-50</button>
        </td>
      </tr>
 
@@ -97,5 +94,5 @@
  </tbody>
 </table>
 <button class='button' onclick={() => {
-  data.push(example2)
+  data.push({...student})
 }}>Добавить участника</button>
