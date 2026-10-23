@@ -14,6 +14,7 @@ th, td {
   border: 1px solid white;
   text-align: left;
   vertical-align: middle;
+  align-items: center;
 }
 th {
   background-color: #6A0DAD;
@@ -28,28 +29,76 @@ th {
 }
 .button:hover {
   background-color: #9370DB;
+
 }
 .button.delete {
   background-color: #A52A2A;
+  border-radius: 8px;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  
 }
 .button.delete:hover {
-  background-color: #CD5C5C;
+  background-color: #fd1414;
+  transform: scale(1.1);
 }
 .button.add{
   background-color: #009200;
+  border-radius: 8px;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 .button.add:hover {
-  background-color: #B4EA7F;
+  background-color: #1eda05;
+  transform: scale(1.1);  
+}
+.button.add:active{
+  transform: scale(0.9); 
 }
 .button.minus {
   background-color: #A52A2A;
+  border-radius: 8px;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 .button.minus:hover {
-  background-color: #CD5C5C;
+  background-color: #fd1414;
+  transform: scale(1.1);
+}
+.button.minus:active {
+  transform: scale(0.9);
+}
+.input::placeholder{
+  color:aliceblue
+}
+.input.name {
+  background-color: #6A0DAD;
+  border-color: #6A0DAD;
+  color:aliceblue; 
+}
+
+.input.group {
+  background-color: #6A0DAD;
+  border-color: #6A0DAD;
+  color:aliceblue;
+  width: 50px;
 }
 
 .prestige-stars {
   color: #FFD700;
   margin-left: 5px;
   font-weight: bold;
+}
+
+.star-button {
+  width: 20px;
+  height: 20px;
+  background-color: #ffd700; 
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.star-button:hover {
+  background-color: #ff9900; 
+  transform: scale(1.1);       
+}
+.star-button:active {
+  transform: scale(0.9);       
 }

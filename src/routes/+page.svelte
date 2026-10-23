@@ -11,10 +11,10 @@
 
   const student =
     {
-      name: 'name',
+      name: '',
       points: 1000,
       prestige: 0,
-      group: 'class',
+      group: '',
     } 
 
   let data: Participiant[] = $state([
@@ -54,7 +54,9 @@
     <th>Имя</th>
     <th>Рейтинг</th>
     <th>Звание</th>
-    <th>Группа</th>
+    <th>Группа 
+      <button class="sort group" aria-label="fff" onclick={()=>{}}></button>
+    </th>
     <th>Действия</th>
   </tr>
  </thead>
@@ -64,12 +66,11 @@
        <td><span>{p.rank}</span></td>
        <td><span>{p.rankInGroup}</span></td>
        <td>
-         <input bind:value={data[p.indexBeforeSort].name}>
-         <span>{'⭐️'.repeat(p.prestige)}</span>
+         <input class="input name" bind:value={data[p.indexBeforeSort].name} placeholder="Иван Алексеев">
+         <button class="star-button" aria-label="⭐"></button>
        </td>
        <td>
          {p.points}
-
          <button class='button add' onclick={()=>{
            const item = data[p.indexBeforeSort]
            item.points += 50
@@ -82,7 +83,9 @@
         }}>-50</button>
        </td>
        <td>{p.title}</td>
-       <td>{p.group}</td>
+       <td>
+        <input class="input group" maxlength="3" bind:value={data[p.indexBeforeSort].group} placeholder="4Б">
+      </td>
        <td>
          <button class='button delete' onclick={() => {
            data.splice(p.indexBeforeSort, 1)
